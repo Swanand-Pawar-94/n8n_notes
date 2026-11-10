@@ -1,0 +1,1006 @@
+n8n BASICS — STUDY NOTES
+Topic: Introduction to Workflow Automation, Nodes, Data, APIs, and AI
+
+
+1. INTRODUCTION TO n8n
+
+n8n is a workflow automation platform that connects different applications, services, databases, and APIs.
+
+It allows users to automate repetitive tasks by creating workflows. A workflow is made by connecting different nodes, where each node performs a specific task.
+
+n8n supports both visual, low-code workflow creation and custom coding when more control is required.
+
+The name n8n is pronounced “n-eight-n”.
+
+IMPORTANT FEATURES
+
+- Connects many applications and online services.
+- Automates repetitive and time-consuming tasks.
+- Supports APIs and webhooks.
+- Provides visual workflow building through a canvas.
+- Supports data transformation and conditional logic.
+- Allows custom code when built-in nodes are not sufficient.
+- Supports AI-related workflows and integrations.
+- Can be used through n8n Cloud or a self-hosted installation.
+
+n8n is distributed under a fair-code licence. It should not be confused with software released under a standard open-source licence.
+
+
+2. WHAT IS WORKFLOW AUTOMATION?
+
+Workflow automation means using software to perform a sequence of tasks automatically, with little or no manual involvement.
+
+A workflow defines:
+- When a process should start.
+- Which operations should be performed.
+- How information should move between operations.
+- What should happen when a condition is met.
+- What should happen if an operation fails.
+
+The main purpose of automation is to reduce manual work, improve consistency, save time, and reduce human errors.
+
+A workflow can run manually during development or automatically after it is published and its trigger is configured.
+
+
+3. HOW n8n WORKS
+
+n8n works by passing data through connected nodes.
+
+The general workflow process is:
+
+1. A trigger starts the workflow.
+2. The first node receives or generates data.
+3. The connected nodes process the data in sequence or through different branches.
+4. Nodes perform actions, transform information, or check conditions.
+5. The workflow reaches its final operation or response.
+6. n8n records the execution details, including its status.
+
+Each node has a specific responsibility. Connecting nodes creates the complete automation process.
+
+IMPORTANT:
+- A workflow is the complete automation.
+- A node is one individual step.
+- A connection determines how data moves between nodes.
+- An execution is one run of a workflow.
+
+
+4. IMPORTANT n8n TERMINOLOGY
+
+Workflow:
+A collection of connected nodes that performs an automated process.
+
+Node:
+An individual component that performs a particular operation.
+
+Trigger:
+A node that starts a workflow when a specified event or condition occurs.
+
+Action:
+An operation that performs a task after the workflow has started.
+
+Connection:
+The link between nodes that controls the direction of data flow.
+
+Execution:
+One complete or partial run of a workflow.
+
+Credential:
+Secure authentication information used to connect n8n to an external application or service.
+
+Expression:
+A dynamic value that reads or calculates information during workflow execution.
+
+Item:
+A single unit of data passed between nodes.
+
+JSON:
+A structured data format commonly used by APIs and n8n nodes.
+
+Webhook:
+A URL that allows another application or service to send information to n8n and trigger a workflow.
+
+API:
+An interface that allows different software applications to communicate with each other.
+
+
+5. n8n INTERFACE AND WORKSPACE
+
+The n8n interface provides the tools required to create, configure, test, and manage workflows.
+
+MAIN AREAS
+
+Workflow Canvas:
+The central working area where nodes are added, arranged, and connected.
+
+Node Panel:
+The area used to search for and add nodes.
+
+Node Configuration Panel:
+The area where the selected node's parameters, credentials, and settings are configured.
+
+Input Panel:
+Displays the data received by the selected node from earlier nodes.
+
+Output Panel:
+Displays the data produced after a node executes.
+
+Execution History:
+Shows previous workflow runs, their status, and available execution data.
+
+Workflow Settings:
+Contains settings that control how the workflow behaves.
+
+Workflow List:
+Displays workflows available in the current account or project.
+
+The canvas is the main area used to design and understand the flow of an automation.
+
+
+6. WORKFLOWS
+
+A workflow is the complete automation created in n8n.
+
+It contains:
+- Nodes that perform individual tasks.
+- Connections that determine the order of operations.
+- Data that moves between nodes.
+- Trigger conditions that start the workflow.
+- Settings that control workflow behaviour.
+
+A workflow can contain a simple sequence of nodes or a more complex structure with branches, loops, and multiple operations.
+
+A workflow should be given a clear name so that its purpose can be identified easily.
+
+A workflow is saved separately from its execution history. Editing a workflow does not mean that the edited version is already running in production.
+
+
+7. NODES
+
+Nodes are the basic building blocks of n8n.
+
+Every node performs a particular operation. A node can receive data, process it, and send output to another node.
+
+MAIN TYPES OF NODES
+
+Trigger Nodes:
+Start a workflow when a specified event or condition occurs.
+
+Action Nodes:
+Perform operations such as creating, updating, retrieving, or sending information.
+
+Data Transformation Nodes:
+Modify, format, filter, or organize information.
+
+Logic Nodes:
+Control the workflow using conditions, branches, and other flow-control operations.
+
+Utility Nodes:
+Perform supporting operations such as waiting, merging, splitting, or handling errors.
+
+AI Nodes:
+Connect language models, agents, memory, and other AI-related components.
+
+NODE CONFIGURATION
+
+A node can contain:
+- Parameters: Define the operation and its required inputs.
+- Credentials: Provide authentication when a service requires it.
+- Options: Control additional behaviour.
+- Settings: Control how the node behaves during execution.
+
+A node's available fields depend on the selected node and operation.
+
+
+8. TRIGGER NODES
+
+A trigger node starts a workflow. It determines when the automation should begin.
+
+COMMON TRIGGER TYPES
+
+Manual Trigger:
+Starts a workflow when the user runs it from the editor. It is mainly used for development and testing.
+
+Schedule Trigger:
+Starts a workflow at configured times or intervals. It can use time-based scheduling.
+
+Webhook Trigger:
+Starts a workflow when an external application sends an HTTP request to its webhook URL.
+
+Application Trigger:
+Starts a workflow when an event occurs in a connected application. Depending on the integration, the trigger may use webhooks or periodic polling.
+
+Form Trigger:
+Starts a workflow when a user submits a form provided by n8n.
+
+IMPORTANT:
+- A trigger is generally the starting point of a workflow.
+- A workflow can have different trigger paths.
+- Trigger configuration determines when the workflow runs.
+- Scheduled and event-based workflows must be published to run automatically in production.
+
+
+9. ACTION NODES
+
+Action nodes perform the actual tasks in a workflow.
+
+They usually run after a trigger or another node provides input data.
+
+Common operations include:
+- Creating records in an application.
+- Updating existing information.
+- Retrieving data.
+- Sending messages or notifications.
+- Uploading or downloading files.
+- Communicating with APIs.
+- Managing information in databases.
+
+An action node generally requires the correct operation, input parameters, and authentication details.
+
+The output of an action node can be passed to later nodes for additional processing.
+
+
+10. CONNECTIONS AND DATA FLOW
+
+Connections link nodes and determine how information moves through a workflow.
+
+A connection is created between the output of one node and the input of another node.
+
+Data normally moves in the direction of the connection.
+
+A node can pass its output to another node, which then uses that output as its input.
+
+WORKFLOW BRANCHES
+
+A workflow can split into multiple paths when different operations need to be performed.
+
+Each branch can process data independently. The workflow can also combine branches later when required.
+
+IMPORTANT:
+- Connections determine the execution flow.
+- A node usually waits for the required input before processing it.
+- The order and structure of connections affect workflow behaviour.
+- Incorrect connections can cause nodes to receive unexpected or missing data.
+
+
+11. DATA STRUCTURE IN n8n
+
+Understanding data is one of the most important parts of learning n8n.
+
+n8n passes data between nodes as items. The data is generally organized in an array of objects.
+
+JSON DATA
+
+JSON stands for JavaScript Object Notation.
+
+It is a lightweight format used to store and exchange structured information.
+
+JSON supports:
+- Strings: Text values.
+- Numbers: Numeric values.
+- Booleans: True or false values.
+- Objects: Collections of key-value pairs.
+- Arrays: Ordered collections of values.
+- Null: Represents an empty or missing value.
+
+Each item commonly stores its structured information inside a property named json.
+
+BINARY DATA
+
+Binary data represents files and other non-text information.
+
+It is used when workflows process files such as:
+- Images.
+- Documents.
+- Audio files.
+- Videos.
+- Other uploaded or downloaded files.
+
+n8n keeps binary file information separate from ordinary JSON data.
+
+IMPORTANT DATA TERMS
+
+Field:
+A named property that stores a particular value.
+
+Key:
+The name used to identify a value in a JSON object.
+
+Value:
+The information stored inside a field.
+
+Object:
+A collection of related key-value pairs.
+
+Array:
+An ordered collection of values or objects.
+
+Nested Data:
+Data stored inside another object or array.
+
+Item:
+One individual data record passed through the workflow.
+
+A clear understanding of JSON, objects, arrays, and fields makes it easier to configure nodes and expressions.
+
+
+12. DATA MAPPING
+
+Data mapping means selecting information from one node and using it in another node.
+
+n8n provides an input panel that displays data received from previous nodes.
+
+Fields can be mapped by selecting or dragging them from the input panel into the required node parameter.
+
+Data mapping helps:
+- Pass information between nodes.
+- Use values returned by APIs.
+- Fill fields in connected applications.
+- Prepare information for later operations.
+- Avoid manually entering values that are already available.
+
+Mapping usually references existing data. It does not necessarily change the original data.
+
+For changing or reorganizing data, use a suitable data transformation node.
+
+
+13. EXPRESSIONS
+
+Expressions are used to create dynamic values in n8n.
+
+A normal fixed value remains the same whenever the workflow runs.
+
+An expression is evaluated during execution and can use information available in the workflow.
+
+Expressions are written using double curly braces:
+
+    {{ expression }}
+
+COMMON EXPRESSION VARIABLES
+
+$json:
+References the JSON data of the current input item.
+
+$input:
+Provides access to input data received by a node.
+
+$node:
+Used in older expression references to access node data. Current expressions also support named-node referencing through n8n's expression syntax.
+
+$execution:
+Provides information about the current workflow execution.
+
+$workflow:
+Provides information about the current workflow.
+
+Expressions can be used to:
+- Read values from incoming data.
+- Reference data from earlier nodes.
+- Combine or format values.
+- Perform calculations.
+- Work with dates and times.
+- Set dynamic parameters for other nodes.
+
+IMPORTANT:
+- Expressions depend on the data available during execution.
+- A referenced field must exist in the relevant input data.
+- A referenced node must have executed when its data is required.
+- Incorrect expressions can produce empty values or execution errors.
+
+For basic data transformation, the Edit Fields (Set) node provides a convenient interface for adding, changing, renaming, or removing fields.
+
+
+14. IMPORTANT DATA TRANSFORMATION NODES
+
+Edit Fields (Set):
+Used to add new fields, change values, rename fields, and remove unnecessary fields.
+
+Filter:
+Allows only items that meet specified conditions to continue.
+
+Sort:
+Arranges items according to selected fields and sorting rules.
+
+Limit:
+Restricts the number of items passed forward.
+
+Aggregate:
+Combines information from multiple items into a grouped structure.
+
+Split Out:
+Separates an array field into individual items.
+
+Remove Duplicates:
+Identifies and removes repeated items based on selected fields.
+
+These nodes help prepare data before it is sent to another application or processed further.
+
+
+15. LOGIC AND FLOW-CONTROL NODES
+
+Logic nodes control which path a workflow follows and how operations are performed.
+
+IF NODE
+
+The IF node checks a condition and divides the workflow into two outputs:
+- True: The condition is satisfied.
+- False: The condition is not satisfied.
+
+Conditions can be based on different data types, including strings, numbers, dates, booleans, arrays, and objects.
+
+Multiple conditions can be combined using:
+- AND: All specified conditions must be satisfied.
+- OR: At least one specified condition must be satisfied.
+
+SWITCH NODE
+
+The Switch node routes data into different output paths based on configured rules.
+
+It is useful when a workflow needs more than two possible routes.
+
+MERGE NODE
+
+The Merge node combines data from multiple input branches.
+
+The selected merge mode determines how the incoming data is combined.
+
+LOOP OVER ITEMS NODE
+
+The Loop Over Items node processes data in batches or repeated steps when a workflow requires controlled iteration.
+
+WAIT NODE
+
+The Wait node pauses workflow execution and allows it to continue later according to its configuration.
+
+IMPORTANT:
+Use flow-control nodes to make workflow logic clear and predictable.
+
+
+16. HTTP REQUEST NODE AND APIs
+
+The HTTP Request node allows n8n to communicate with external services through their APIs.
+
+It is one of the most flexible nodes because it can connect to services even when a dedicated n8n integration is not available.
+
+IMPORTANT API TERMS
+
+API Endpoint:
+The URL where an API operation is available.
+
+HTTP Method:
+Defines the type of operation being requested.
+
+COMMON HTTP METHODS
+
+GET:
+Retrieves information from a server.
+
+POST:
+Sends information to a server, commonly to create or submit data.
+
+PUT:
+Replaces or updates a resource.
+
+PATCH:
+Updates selected parts of a resource.
+
+DELETE:
+Requests removal of a resource.
+
+HEAD:
+Requests response headers without the response body.
+
+OPTIONS:
+Requests information about communication options supported by a server.
+
+QUERY PARAMETERS
+
+Query parameters are values added to a request URL to filter or control the information being requested.
+
+HEADERS
+
+Headers carry additional information about an HTTP request or response. They commonly contain content information and authentication details.
+
+REQUEST BODY
+
+The request body contains data sent to an API. It may use formats such as JSON, form data, or raw data.
+
+API RESPONSE
+
+The response is the information returned by the server after processing a request.
+
+STATUS CODES
+
+- 2xx: The request was successful.
+- 3xx: The request requires redirection or further action.
+- 4xx: There is a problem with the request or its authorization.
+- 5xx: The server encountered an error while processing the request.
+
+IMPORTANT:
+Always check the API documentation for the correct endpoint, method, parameters, body format, and authentication method.
+
+
+17. WEBHOOKS
+
+A webhook is a way for one application to send information to another application automatically when an event occurs.
+
+In n8n, the Webhook node creates a URL that an external service can call.
+
+When n8n receives a valid request at the configured webhook endpoint, the workflow can start and process the received data.
+
+IMPORTANT WEBHOOK TERMS
+
+Webhook URL:
+The address used by an external service to send a request to n8n.
+
+HTTP Method:
+The request method accepted by the webhook, such as GET or POST.
+
+Request Headers:
+Additional information sent with the request.
+
+Query Parameters:
+Values included in the URL.
+
+Request Body:
+The main data sent to the webhook.
+
+Response:
+The information returned by n8n to the calling service.
+
+TEST URL AND PRODUCTION URL
+
+Test URL:
+Used while developing and testing a webhook workflow. The workflow must be listening for a test event or running in test mode.
+
+Production URL:
+Used after the workflow has been published. It is intended for real requests from external services.
+
+WEBHOOK AUTHENTICATION
+
+A webhook can be protected using authentication methods supported by n8n, such as:
+- Basic authentication.
+- Header authentication.
+- JWT authentication.
+- OAuth-based user authentication.
+- No authentication, when appropriate.
+
+IMPORTANT:
+Production webhooks should be protected when they process private or sensitive information. Do not expose an unprotected webhook unless the use case genuinely requires public access.
+
+
+18. SCHEDULE TRIGGER
+
+The Schedule Trigger starts a workflow at configured times or intervals.
+
+It can be configured using time intervals such as:
+- Seconds.
+- Minutes.
+- Hours.
+- Days.
+- Weeks.
+- Months.
+- Custom Cron scheduling.
+
+A scheduled workflow must be published to run automatically.
+
+TIMEZONE
+
+The Schedule Trigger uses the workflow timezone when one is configured. Otherwise, it uses the n8n instance timezone.
+
+An incorrect timezone can cause a workflow to run at an unexpected time.
+
+Always verify the timezone and schedule before publishing a time-based workflow.
+
+
+19. CREDENTIALS AND AUTHENTICATION
+
+Credentials are authentication details that allow n8n to connect securely to external applications and services.
+
+A service may require authentication before it allows n8n to access its data or perform operations.
+
+COMMON AUTHENTICATION METHODS
+
+API Key:
+A unique key used to identify and authorize an application.
+
+Basic Authentication:
+Uses a username and password.
+
+Header Authentication:
+Sends authentication information through HTTP request headers.
+
+OAuth 2.0:
+Allows an application to obtain authorized access through a token-based process.
+
+Bearer Token:
+A token included in an authorization header to access a protected resource.
+
+CREDENTIAL MANAGEMENT
+
+- Create credentials for the required service.
+- Select the correct authentication method.
+- Enter the required authentication details.
+- Test the connection when the interface provides that option.
+- Select the saved credential in the relevant node.
+
+IMPORTANT SECURITY RULES
+
+- Never share API keys or passwords publicly.
+- Do not hardcode secret values into workflow text or code.
+- Use n8n's credential management.
+- Give credentials only the permissions required for the task.
+- Regenerate exposed or compromised keys.
+- Review access to workflows that use shared credentials.
+
+
+20. TESTING AND DEBUGGING WORKFLOWS
+
+Testing is necessary to confirm that each node and the complete workflow behave correctly.
+
+n8n allows users to execute individual nodes or run a workflow during development.
+
+BASIC TESTING PROCESS
+
+1. Configure the trigger and required nodes.
+2. Provide or generate input data.
+3. Execute the relevant node.
+4. Inspect the node's output.
+5. Check whether the output contains the required fields and values.
+6. Continue testing the connected nodes.
+7. Run the complete workflow.
+8. Fix any errors before publishing.
+
+PINNED DATA
+
+Pinned data allows a node to reuse previously captured output during development.
+
+It helps test later nodes without repeatedly running earlier parts of the workflow.
+
+Pinned data is mainly a development aid. It should not be confused with live production data.
+
+DEBUGGING
+
+Debugging means finding and correcting problems in a workflow.
+
+When an error occurs:
+- Identify the node where execution failed.
+- Read the error message.
+- Inspect the node's input data.
+- Check the node's parameters.
+- Verify expressions and field names.
+- Confirm that required credentials are valid.
+- Check the API response and status code.
+- Execute the node again after making corrections.
+
+The input and output panels are important tools for understanding what is happening at each step.
+
+
+21. WORKFLOW EXECUTIONS
+
+An execution is one run of a workflow.
+
+n8n records execution information so that users can understand how a workflow performed.
+
+COMMON EXECUTION TYPES
+
+Manual Execution:
+A workflow run started by the user from the editor. It is mainly used for testing.
+
+Partial Execution:
+Runs selected parts of a workflow during development, depending on the selected starting point and available data.
+
+Production Execution:
+A workflow run started automatically by a published workflow's trigger.
+
+EXECUTION STATUS
+
+Success:
+The workflow completed successfully.
+
+Error:
+The workflow encountered a problem during execution.
+
+Running:
+The workflow is currently executing.
+
+Waiting:
+The workflow is paused and waiting for a configured event or condition.
+
+EXECUTION HISTORY
+
+The execution history helps users:
+- Review previous runs.
+- Identify failed executions.
+- Inspect available input and output data.
+- Understand where an error occurred.
+- Retry a failed execution when appropriate.
+
+Execution data may contain sensitive information. Access and retention should be managed carefully.
+
+
+22. SAVING, PUBLISHING, AND ACTIVATING WORKFLOWS
+
+Saving and publishing are different operations.
+
+SAVING
+
+n8n automatically saves workflow edits. Saved edits remain in draft until they are published.
+
+PUBLISHING
+
+Publishing makes a workflow version live for production use.
+
+After publishing:
+- Production executions use the published version.
+- Production webhook URLs become available.
+- Scheduled triggers can run automatically.
+- Connected application events can trigger the workflow.
+
+If a workflow is edited after publishing, the new changes may remain in draft until the workflow is published again.
+
+UNPUBLISHING
+
+Unpublishing removes the workflow from production so that its triggers no longer run as an active production workflow.
+
+IMPORTANT TERMINOLOGY
+
+Current n8n versions use the term Publish for putting a workflow into production. Some older versions of n8n use Activate or Active for similar functionality.
+
+Always check the wording shown in the version of n8n you are using.
+
+
+23. ERROR HANDLING
+
+Error handling is the process of detecting, managing, and responding to problems during workflow execution.
+
+Common causes of errors include:
+- Invalid input data.
+- Missing required fields.
+- Incorrect expressions.
+- Invalid API endpoints.
+- Authentication failures.
+- Insufficient permissions.
+- Network problems.
+- API rate limits.
+- External service downtime.
+- Incorrect data types.
+
+IMPORTANT ERROR-HANDLING NODES
+
+Error Trigger:
+Starts an error workflow when another workflow fails, according to its configuration.
+
+Stop And Error:
+Stops a workflow and raises a custom error when a specified condition or situation requires it.
+
+ERROR-HANDLING PRACTICES
+
+- Validate important input data.
+- Check the output of critical nodes.
+- Use clear conditions before performing sensitive actions.
+- Configure retries carefully when appropriate.
+- Record useful error information.
+- Notify the responsible person when important workflows fail.
+- Avoid repeating operations that could create duplicate records or payments.
+- Test failure paths as well as successful paths.
+
+
+24. AI AUTOMATION IN n8n
+
+n8n supports AI-related workflows through integrations with language models and other AI services.
+
+AI automation combines normal workflow operations with AI-based processing.
+
+IMPORTANT AI COMPONENTS
+
+Language Model:
+The AI model that processes prompts and generates responses.
+
+AI Agent:
+A component that can use a language model and connected tools to decide how to perform a task.
+
+Chat Model:
+The language model connected to an AI component.
+
+Memory:
+Stores relevant conversation information so an AI workflow can use previous context, depending on the selected memory implementation.
+
+Tool:
+An operation or capability that an AI agent can use to interact with another service or perform a task.
+
+Vector Store:
+A system used to store and retrieve information through vector representations. It is commonly used in semantic search and retrieval-based AI systems.
+
+Embeddings:
+Numerical representations of text that help systems compare meaning and retrieve related information.
+
+AI CREDENTIALS
+
+AI integrations often require an API key from the model provider.
+
+The API key must be created through the provider's account and then saved in the appropriate n8n credential.
+
+n8n does not automatically provide access to every external AI model. Availability, usage limits, and charges depend on the selected provider and its plan.
+
+IMPORTANT:
+- Select the correct model provider.
+- Configure the required credentials.
+- Check model and API limits.
+- Review the data being sent to external AI services.
+- Validate AI-generated output before using it for important operations.
+- Add human approval when an automated decision could have significant consequences.
+
+
+25. CLOUD AND SELF-HOSTED n8n
+
+n8n can be used through managed cloud hosting or by running your own instance.
+
+n8n CLOUD
+
+n8n Cloud is the hosted option managed by n8n.
+
+Main characteristics:
+- No need to manage the server yourself.
+- Hosting and infrastructure are handled by the provider.
+- Updates and platform maintenance are managed through the service.
+- Usage is subject to the selected plan and its limits.
+
+SELF-HOSTED n8n
+
+Self-hosting means installing and operating n8n on infrastructure that you manage.
+
+It can be deployed using supported installation methods such as Docker or npm.
+
+Main characteristics:
+- Greater control over the hosting environment.
+- More responsibility for updates and maintenance.
+- Requires attention to backups, security, and server resources.
+- Requires correct configuration of networking and access.
+
+IMPORTANT:
+Choose the hosting method based on your technical requirements, budget, privacy needs, and maintenance responsibilities.
+
+
+26. WORKFLOW DESIGN BEST PRACTICES
+
+A well-designed workflow should be understandable, reliable, secure, and easy to maintain.
+
+IMPORTANT PRACTICES
+
+- Give every workflow a meaningful name.
+- Use clear names for nodes.
+- Keep workflows organized and avoid unnecessary complexity.
+- Use the correct trigger for the required process.
+- Check input and output data at important stages.
+- Use expressions only where dynamic values are required.
+- Transform data before passing it to later operations when appropriate.
+- Store authentication details in credentials.
+- Test workflows before publishing.
+- Handle errors and unexpected input.
+- Avoid unnecessary API requests.
+- Respect API rate limits.
+- Keep sensitive information protected.
+- Review production executions regularly.
+- Document important workflow behaviour.
+- Use smaller reusable workflows when a large workflow becomes difficult to manage.
+
+
+27. COMMON n8n PROBLEMS
+
+Workflow Does Not Start:
+Check whether the correct trigger is configured and whether the workflow is published.
+
+Webhook Does Not Receive Data:
+Verify the webhook URL, HTTP method, authentication, and test or production mode.
+
+Schedule Runs at the Wrong Time:
+Check the workflow timezone and instance timezone.
+
+Credential Error:
+Verify the credential type, API key, token, permissions, and account connection.
+
+Expression Returns Empty Data:
+Check the input data, field name, expression syntax, and whether the referenced node has executed.
+
+HTTP Request Fails:
+Verify the endpoint, method, headers, parameters, body, authentication, and response status.
+
+Node Receives No Data:
+Inspect the previous node's output and confirm that the connection is correct.
+
+Workflow Stops Unexpectedly:
+Inspect the execution history and identify the node that failed or stopped the workflow.
+
+Duplicate Operations:
+Check whether triggers or retries are causing the same operation to run more than once. Add suitable checks before performing operations that should happen only once.
+
+
+28. BASIC LEARNING ORDER
+
+A beginner should learn n8n in the following order:
+
+1. Understand workflow automation and the n8n interface.
+2. Learn workflows, nodes, triggers, actions, and connections.
+3. Understand JSON, objects, arrays, and items.
+4. Learn how data moves between nodes.
+5. Understand data mapping and expressions.
+6. Learn the main data transformation nodes.
+7. Learn IF, Switch, Merge, and Loop Over Items.
+8. Understand APIs and the HTTP Request node.
+9. Learn webhook-based automation.
+10. Learn scheduled workflows.
+11. Understand credentials and authentication.
+12. Practise testing, debugging, and execution history.
+13. Learn saving, publishing, and error handling.
+14. Explore AI integrations after understanding the basic workflow concepts.
+
+A strong understanding of nodes, data flow, expressions, APIs, and credentials provides the foundation for building more advanced n8n automations.
+
+
+29. IMPORTANT TERMS — QUICK REVISION
+
+Automation:
+Using software to perform tasks with reduced manual effort.
+
+Workflow:
+A connected sequence of operations that performs an automated process.
+
+Node:
+An individual component that performs a task.
+
+Trigger:
+The event or condition that starts a workflow.
+
+Action:
+An operation performed by a workflow.
+
+Connection:
+A link that transfers data between nodes.
+
+Execution:
+A single run of a workflow.
+
+JSON:
+A structured format used to exchange data.
+
+Item:
+One unit of data passed between nodes.
+
+Expression:
+A dynamic value evaluated during workflow execution.
+
+API:
+An interface that allows software applications to communicate.
+
+Endpoint:
+A URL through which an API operation can be accessed.
+
+Webhook:
+A URL that receives event-based requests from external services.
+
+Credential:
+Authentication information stored for connecting to a service.
+
+HTTP Request:
+A node used to communicate with APIs through HTTP.
+
+Data Mapping:
+Referencing fields from one node in another node.
+
+IF:
+A node that divides workflow data based on a condition.
+
+Switch:
+A node that routes data into multiple possible paths.
+
+Merge:
+A node that combines data from multiple branches.
+
+Schedule Trigger:
+A node that starts workflows at configured times or intervals.
+
+AI Agent:
+An AI component that can use tools to perform tasks.
+
+Publishing:
+Making a workflow version available for production execution.
